@@ -13,11 +13,12 @@ from utils import search
 @click.option('--countries', '-c', default=None, help='Select based on the country code')
 @click.option('--save', '-s', is_flag=True, help='Save per country cases in csv file')
 def main(world, countries, save):
-    """Get covid-19 most recent data and convert it into pandas dataframe.
+    """Get covid-19 most recent data and convert it to pandas dataframe. 
 
     Args:
-        summary (text): print global's most recent cases
-        countries (text): print user selected country's most recent cases
+        summary (text): print global most recent cases
+        countries (text): print user selected country most recent cases
+        save (bool): option to save the search results
     """
     url = 'https://api.covid19api.com/summary'
     results = search.search_cases(url)
