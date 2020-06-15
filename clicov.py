@@ -1,10 +1,10 @@
+import datetime as dt
 import json
 import os
-import datetime as dt
 
-import requests
 import click
 import pandas as pd
+import requests
 from tabulate import tabulate
 
 from utils import search
@@ -60,9 +60,9 @@ def summary(world, countries, save):
         for column in bottom_table.columns:
             bottom_table[column] = bottom_table[column].apply(lambda x: f'{x:,}')
         print(f'{country_name} cases:')
-        print(f'\nData date and time (24H): {accessed_date}')
         print(tabulate(top_table, headers='keys', tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         print(tabulate(bottom_table, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+        print(f'\nData date and time (24H): {accessed_date} UTC')
 
     if save:
         try:
@@ -75,7 +75,7 @@ def summary(world, countries, save):
             print('\nThe program cannot save the results. A file with the same filename exists.')
     
     print('\nAPI: https://covid19api.com/')
-    print('Data source: the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University\n')
+    print('Data source: CSSE, Johns Hopkins University\n')
     
 @main.command('country', help='Get country data from day one')
 @click.option('--select', '-c', help='Select country name')
