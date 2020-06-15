@@ -43,13 +43,17 @@ def main(world, countries, save):
         cases = country_cases.loc[country_cases['CountryCode'] == country_code]
         country_name = country_cases.loc[country_cases['CountryCode'] == country_code, 'Country']
         country_name = country_name.to_string(index=False)
+        country_name = country_name.replace(' ','')
+        accessed_date = cases['Date'].to_string(index=False)
+        accessed_date = accessed_date.replace('T', ' ').replace('Z','')
         df1 = cases.filter(['NewConfirmed', 'TotalConfirmed', 'NewDeaths'])
         for i in df1.columns:
             df1[i] = df1[i].apply(lambda x: f'{x:,}')
         df2 = cases.filter(['TotalDeaths', 'NewRecovered', 'TotalRecovered'])
         for i in df2.columns:
             df2[i] = df2[i].apply(lambda x: f'{x:,}')
-        print(f'\n{country_name.title()} cases:\n')
+        print(f'{country_name} cases:\n')
+        print(f'Date: {accessed_date}')
         print(tabulate(df1, headers='keys', tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         print(tabulate(df2, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
     if save:
