@@ -1,4 +1,0 @@
-Click
-pandas
-requests
-tabulate
