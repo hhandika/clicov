@@ -1,4 +1,5 @@
 import json
+import os
 
 import requests
 import pandas as pd
@@ -8,15 +9,22 @@ from tabulate import tabulate
 from utils import search
 
 @click.command()
-@click.option('--summary', '-s', is_flag=True, help='Get summary of new cases' )
-@click.option('--countries', '-c', default=None, help='Select country new cases')
-def main(summary, countries):
-    """
+@click.option('--world', '-w', is_flag=True, help='Get summary of global cases' )
+@click.option('--countries', '-c', default=None, help='Select based on the country code')
+@click.option('--save', '-s', is_flag=True, help='Save per country cases in csv file')
+def main(world, countries, save):
+    """Get covid-19 most recent data and convert it into pandas dataframe.
+
+    Args:
+        summary (text): print global's most recent cases
+        countries (text): print user selected country's most recent cases
     """
     url = 'https://api.covid19api.com/summary'
     results = search.search_cases(url)
     global_cases = results['Global']
-    if summary:
+    country_cases = pd.json_normalize(results['Countries'])
+
+    if world:
         confirmed_cases = global_cases['NewConfirmed']
         total_cases = global_cases['TotalConfirmed']
         new_deaths = global_cases['NewDeaths']
@@ -29,12 +37,25 @@ def main(summary, countries):
         print(f'New deaths: {new_deaths:,}')
         print(f'New recovered: {new_recovered:,}')
         print(f'Total recovered: {total_recovered:,}\n')
+
     if countries:
-        countries = countries.title()
-        country_cases = pd.json_normalize(results['Countries'])
-        cases = country_cases.loc[country_cases['Country'] == countries]
+        country_code = countries.upper()
+        cases = country_cases.loc[country_cases['CountryCode'] == country_code]
+        country_name = country_cases.loc[country_cases['CountryCode'] == country_code, 'Country']
+        country_name = country_name.to_string(index=False)
         df1 = cases.filter(['NewConfirmed', 'TotalConfirmed', 'NewDeaths'])
+        for i in df1.columns:
+            df1[i] = df1[i].apply(lambda x: f'{x:,}')
         df2 = cases.filter(['TotalDeaths', 'NewRecovered', 'TotalRecovered'])
-        print(countries.title())
-        print(tabulate(df1, headers='keys', tablefmt='psql'))
-        print(tabulate(df2, headers='keys',  tablefmt='psql'))
+        for i in df2.columns:
+            df2[i] = df2[i].apply(lambda x: f'{x:,}')
+        print(f'\n{country_name.title()} cases:\n')
+        print(tabulate(df1, headers='keys', tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+        print(tabulate(df2, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+    if save:
+        try:
+            country_cases.to_csv('country_cases.csv', index=False)
+            print('\nDone! saved')
+        except PermissionError:
+            print('\nThe same file exist. Permission to overwrite the file is denied.')
+
