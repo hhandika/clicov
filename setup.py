@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='clicov',
-    version='0.0.1',
+    version='0.0.3',
     author= "Heru Handika",
-    author_email = "hhandika.us [at] gmail [dot] com",
+    author_email = "hhandika.us@gmail.com",
     include_package_data=True,
     py_modules=find_packages(),
     install_requires=[
