@@ -54,4 +54,3 @@ def change_number_formats(tables):
     """
     for column in tables.columns:
         tables[column] = tables[column].apply(lambda x: f'{x:,}')
-        return tables[column]

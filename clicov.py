@@ -185,6 +185,7 @@ def get_usa_covid(states, daily, save):
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center', floatfmt='.2f'))
         else:
             top_results = results.filter(['positive', 'negative'])
+            top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
             trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
