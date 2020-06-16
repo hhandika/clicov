@@ -28,21 +28,30 @@ def search_cases(url):
     data = res.json()
     return data
 
-def get_url_usa_cases(queries, current, allstates):
+def get_url_usa_cases(states, daily):
     """
 
     Args:
         url ([type]): [description]
     """
-    extension = '.json'
     link = 'https://covidtracking.com/api/v1/states/'
-    if queries is not None:
-        if current:
-            url =  link + queries + current + extension
-            return url
-        else:
-            url = url =  link + queries + 'daily' + extension
-            return url
-    if allstates:
-        url = link + current + extension
+    if daily:
+        extension = '/daily.json'
+    else:
+        extension = '/current.json'
+    if states != 'all':
+        url = link + states + extension
         return url
+    else:
+        url = link + extension
+        return url
+
+def change_number_formats(tables):
+    """
+
+    Args:
+        tables ([type]): [description]
+    """
+    for column in tables.columns:
+        tables[column] = tables[column].apply(lambda x: f'{x:,}')
+        return tables[column]

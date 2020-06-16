@@ -153,21 +153,48 @@ def download_results(country):
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
 @main.command('usa', help='Get selected state covid-19 cases')
-@click.option('--state', '-s', default=None, help='Select state based on state code')
-@click.option('--current/--daily', '-cr/dl', default='current', help='Choose current data or historical data')
-@click.option('--allstate', '-all', is_flag=True, help='View all-state covid19 cases')
-def get_usa_covid(states, current, allstate):
+@click.option('--states', '-s', default='all', help='Select state based on state code')
+@click.option('--daily', '-d', is_flag=True, help='Choose historical data')
+@click.option('--save', '-sv', is_flag=True, help='Save results to csv')
+def get_usa_covid(states, daily, save):
     """
 
     Args:
         state ([type]): [description]
     """
-    queries = search.clean_user_inputs(states)
-    url = search.get_url_usa_cases(queries, current, allstate)
+    if states != 'all':
+        queries = search.clean_user_inputs(states)
+        url = search.get_url_usa_cases(queries, daily)
+    else:
+        url = search.get_url_usa_cases(states, daily)
     results = search.search_cases(url)
     results = pd.json_normalize(results)
-    print(tabulate(results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-    print('Data provider: The Covid Tracking Project at the Atlantic')
+
+    if daily:
+        filename = 'allstates-cases_' + date + '.csv'
+        results.to_csv('results.csv', index=False)
+        print(f'\nResults are save in {current_wd} as {filename}')
+    else:
+        if states == 'all':
+            filename = 'allstates-cases_' + date + '.csv'
+            if save:
+                results.to_csv('results.csv', index=False)
+                print(f'\nDetails results are save in {current_wd} as {filename}')
+            printed_results = results.filter(['state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
+            print("\nAll USA states' cases: ")
+            print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center', floatfmt='.2f'))
+        else:
+            top_results = results.filter(['positive', 'negative'])
+            hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
+            icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
+            trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
+            print(f'\n{states.upper()} cases:\n')
+            print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+            print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+            print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+            print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+
+    print('\nData provider: The Covid Tracking Project at the Atlantic')
     print('Data license: CC BY-NC-4.0')
     print('Details on data usages: https://covidtracking.com/about-data')
     
