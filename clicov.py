@@ -22,7 +22,51 @@ def main():
     A simple command line program to access covid-19 data.
 
     Usages:
+
+    To display summary of cases:
+
+    World cases: clicov summary -w
+
+    Selected country: clicov summary -c [country-iso2-id]
+
+    To download country cases from day one:
+
+    clicov download -c [country-iso2-id/slug]
+
+    To display country isoid:
+
+    All: clicov isoid
+
+    For country with one word, you could just type the country name.
+
+    If more, use underscore.
     
+    clicov isoid -c [country-name]
+
+    clicov isoid -c united_states
+
+    Popular country  ISO2 codes:
+
+    Australia: AU
+
+    Brazil: BR
+
+    China: CN
+
+    France: FR
+
+    Germany: DE
+
+    India: IN
+
+    Indonesia: ID
+
+    Japan: JP
+
+    United Kingdom : GB
+
+    United States: US
+
     """
     pass
 
@@ -30,7 +74,7 @@ def main():
 @click.option('--world', '-w', is_flag=True, help='Get summary of global cases' )
 @click.option('--countries', '-c', default=None, help='Use ISO2 country code to display a country summary cases')
 @click.option('--save', '-sv', is_flag=True, help='Save per country cases in csv file')
-def summary(world, countries, save):
+def get_summary(world, countries, save):
     """Get covid-19 most recent global cases and/or by country cases. 
 
     Args:
@@ -88,9 +132,9 @@ def summary(world, countries, save):
     print('\nAPI: https://covid19api.com/')
     print('Data source: CSSE, Johns Hopkins University\n')
     
-@main.command('country', help='Get country data from day one')
+@main.command('download', help='Get country data from day one')
 @click.option('--country', '-c', help='Select country name')
-def country(select):
+def download_results(country):
     """
     
 
@@ -102,7 +146,7 @@ def country(select):
     results = search.search_cases(url)
     save_files = pd.json_normalize(results)
     try:
-        filename = select.upper() + '-cases_' + date + '.csv'
+        filename = country.upper() + '-cases_' + date + '.csv'
         save_files.to_csv(filename, index=False)
         print(f'\nDone! \nThe results are saved in {current_wd} as {filename}')
     except PermissionError:
@@ -110,7 +154,7 @@ def country(select):
 
 @main.command('usa', help='Get selected state covid-19 cases')
 @click.option('--state', '-s', help='Select state based on state code')
-def usa(state):
+def get_usa_covid(state):
     pass
 
 @main.command('isoid', help='Display country ISO2 id')
@@ -122,6 +166,7 @@ def get_isoid(country):
     url = 'https://api.covid19api.com/countries'
     results = search.search_cases(url)
     tabled_results = pd.json_normalize(results)
+    tabled_results = tabled_results.sort_values(by=['Country'])
     if country is not None:
         queries = search.clean_user_inputs(country)
         country_id = tabled_results.loc[tabled_results['Slug'] == queries]
