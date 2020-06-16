@@ -9,8 +9,21 @@ from tabulate import tabulate
 
 from utils import search
 
+#Get date and current working directory for saving files.
+current_wd = os.getcwd()
+date = dt.datetime.today().strftime("%Y-%m-%d")
+
+#Setup group function for click commands. 
 @click.group()
 def main():
+    """
+    clicov 0.0.3
+
+    A simple command line program to access covid-19 data.
+
+    Usages:
+    
+    """
     pass
 
 @main.command('summary')
@@ -66,8 +79,6 @@ def summary(world, countries, save):
 
     if save:
         try:
-            current_wd = os.getcwd()
-            date = dt.datetime.today().strftime("%Y-%m-%d")
             filename = 'result-country-cases_' + date + '.csv'
             country_cases.to_csv(filename, index=False)
             print(f'\nDone! \nThe results are saved in {current_wd} as {filename}')
@@ -78,11 +89,42 @@ def summary(world, countries, save):
     print('Data source: CSSE, Johns Hopkins University\n')
     
 @main.command('country', help='Get country data from day one')
-@click.option('--select', '-c', help='Select country name')
+@click.option('--country', '-c', help='Select country name')
 def country(select):
-    pass
+    """
+    
+
+    Args:
+        select ([type]): [description]
+    """
+    queries = search.clean_user_inputs(country)
+    url = 'https://api.covid19api.com/total/country/' + queries
+    results = search.search_cases(url)
+    save_files = pd.json_normalize(results)
+    try:
+        filename = select.upper() + '-cases_' + date + '.csv'
+        save_files.to_csv(filename, index=False)
+        print(f'\nDone! \nThe results are saved in {current_wd} as {filename}')
+    except PermissionError:
+        print('\nThe program cannot save the results. A file with the same filename exists.')
 
 @main.command('usa', help='Get selected state covid-19 cases')
 @click.option('--state', '-s', help='Select state based on state code')
 def usa(state):
     pass
+
+@main.command('isoid', help='Display country ISO2 id')
+@click.option('--country', '-c', default= None, help ='Select by country')
+def get_isoid(country):
+    """
+    
+    """
+    url = 'https://api.covid19api.com/countries'
+    results = search.search_cases(url)
+    tabled_results = pd.json_normalize(results)
+    if country is not None:
+        queries = search.clean_user_inputs(country)
+        country_id = tabled_results.loc[tabled_results['Slug'] == queries]
+        print(tabulate(country_id, headers='keys', tablefmt='pretty', showindex=False, stralign='center'))
+    else:
+        print(tabulate(tabled_results, headers='keys', tablefmt='pretty', showindex=False, stralign='center'))
