@@ -153,9 +153,24 @@ def download_results(country):
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
 @main.command('usa', help='Get selected state covid-19 cases')
-@click.option('--state', '-s', help='Select state based on state code')
-def get_usa_covid(state):
-    pass
+@click.option('--state', '-s', default=None, help='Select state based on state code')
+@click.option('--current/--daily', '-cr/dl', default='current', help='Choose current data or historical data')
+@click.option('--allstate', '-all', is_flag=True, help='View all-state covid19 cases')
+def get_usa_covid(states, current, allstate):
+    """
+
+    Args:
+        state ([type]): [description]
+    """
+    queries = search.clean_user_inputs(states)
+    url = search.get_url_usa_cases(queries, current, allstate)
+    results = search.search_cases(url)
+    results = pd.json_normalize(results)
+    print(tabulate(results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+    print('Data provider: The Covid Tracking Project at the Atlantic')
+    print('Data license: CC BY-NC-4.0')
+    print('Details on data usages: https://covidtracking.com/about-data')
+    
 
 @main.command('isoid', help='Display country ISO2 id')
 @click.option('--country', '-c', default= None, help ='Select by country')

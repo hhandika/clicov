@@ -27,3 +27,22 @@ def search_cases(url):
     res.raise_for_status()
     data = res.json()
     return data
+
+def get_url_usa_cases(queries, current, allstates):
+    """
+
+    Args:
+        url ([type]): [description]
+    """
+    extension = '.json'
+    link = 'https://covidtracking.com/api/v1/states/'
+    if queries is not None:
+        if current:
+            url =  link + queries + current + extension
+            return url
+        else:
+            url = url =  link + queries + 'daily' + extension
+            return url
+    if allstates:
+        url = link + current + extension
+        return url
