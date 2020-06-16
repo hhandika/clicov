@@ -173,3 +173,6 @@ def get_isoid(country):
         print(tabulate(country_id, headers='keys', tablefmt='pretty', showindex=False, stralign='center'))
     else:
         print(tabulate(tabled_results, headers='keys', tablefmt='pretty', showindex=False, stralign='center'))
+
+if __name__ == '__main__':
+    main()
