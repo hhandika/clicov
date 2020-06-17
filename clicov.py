@@ -76,17 +76,21 @@ def main():
     """
     pass
 
+#Function to handle world cases and multi-country covid19 data. Docstring will be displayed in the command help.
 @main.command('summary')
-@click.option('--world', '-w', is_flag=True, help='Get summary of global cases' )
-@click.option('--countries', '-c', default=None, help='Use ISO2 country code to display a country summary cases')
+@click.option('--world', '-w', is_flag=True, help='Get summary of global covid19 cases' )
+@click.option('--countries', '-c', default=None, help='Display a country summary cases')
 @click.option('--save', '-sv', is_flag=True, help='Save per country cases in csv file')
 def get_summary(world, countries, save):
-    """Get covid-19 most recent global cases and/or by country cases. 
+    """
+    Get covid-19 most recent global cases and/or by country cases. 
+    
+    To display a country summary cases, use a slug name or an ISO2 country code
 
-    Args:
-        summary (text): print global most recent cases
-        countries (text): print user selected country most recent cases
-        save (bool): If flagged, the results will be saved in the current user working directory.
+    Example:
+
+    clicov summary -c us
+
     """
     url = 'https://api.covid19api.com/summary'
     results = search.search_cases(url)
@@ -135,15 +139,20 @@ def get_summary(world, countries, save):
     
     print('\nAPI: https://covid19api.com/')
     print('Data source: CSSE, Johns Hopkins University\n')
-    
+
+#Options to download cases from day one. 
+#Nothing will be displayed if this command is used.
+#The function is a saved to csv only option.    
 @main.command('download', help='Get country data from day one')
 @click.option('--country', '-c', help='Select country name')
 def download_results(country):
     """
-    
+    Download country covid-19 data from day one.
+    Use slugs or id to choose the country.
 
-    Args:
-        select ([type]): [description]
+    Commands:
+
+    clicov download -c id
     """
     queries = search.clean_user_inputs(country)
     url = 'https://api.covid19api.com/total/country/' + queries
@@ -156,15 +165,34 @@ def download_results(country):
     except PermissionError:
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
+ 
 @main.command('usa', help='Get selected state covid-19 cases')
 @click.option('--states', '-s', default='all', help='Select state based on state code')
-@click.option('--daily', '-d', is_flag=True, help='Choose historical data')
+@click.option('--daily', '-d', is_flag=True, help='States covid19 data from dayone')
 @click.option('--save', '-sv', is_flag=True, help='Save results to csv')
 def get_usa_covid(states, daily, save):
     """
+    Command to dig dive into the U.S covid19 cases. 
+    You can display or download the data.
+    Data is presented in state by state cases.
+    For summary of the U.S covid19 cases, use the 'summary' command. 
 
-    Args:
-        state ([type]): [description]
+    To display all states covid19 data:
+
+    clicov usa
+
+    If you wish to save all-state data:
+
+    clicov usa -sv
+
+    For daily cases, the option is only available per state. 
+    Use -s or --states option to query this command.
+    The resulting data will be saved in your current working directory.
+
+    Example:
+
+    clicov usa -s ny -d
+
     """
     if states != 'all':
         queries = search.clean_user_inputs(states)
@@ -192,15 +220,19 @@ def get_usa_covid(states, daily, save):
             top_results = results.filter(['positive', 'negative'])
             top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
+
+            #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
             try:
                 hospitalized_results = search.change_number_formats(hospitalized_results)
             except:
                 pass
+
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
             try:
                 icu_results = search.change_number_formats(icu_results)
             except:
                 pass
+
             trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
@@ -213,11 +245,26 @@ def get_usa_covid(states, daily, save):
     print('Details on data usages: https://covidtracking.com/about-data')
     
 
-@main.command('isoid', help='Display country ISO2 id')
+@main.command('id', help='Display country ISO2 id')
 @click.option('--country', '-c', default= None, help ='Select by country')
 def get_isoid(country):
     """
-    
+    Get ISO2 country code. 
+
+    To display all-country codes:
+
+    clicov id
+
+    To display select country:
+
+    For single word country:
+
+    clicov id -c indonesia
+
+    For multi-words country name, use underscore:
+
+    clicov id -c united_states
+
     """
     url = 'https://api.covid19api.com/countries'
     results = search.search_cases(url)
