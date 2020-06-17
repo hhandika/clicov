@@ -269,6 +269,7 @@ def get_isoid(country):
     results = search.search_cases(url)
     tabled_results = pd.json_normalize(results)
     tabled_results = tabled_results.sort_values(by=['Country'])
+
     if country is not None:
         queries = search.clean_user_inputs(country)
         country_id = tabled_results.loc[tabled_results['Slug'] == queries]

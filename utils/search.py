@@ -5,7 +5,7 @@ import requests
 
 def clean_user_inputs(queries):
     """
-    Convert user inputs to match the api inputs.
+    Convert user inputs to match the api request input.
 
     Args:
         queries (string): country/us state codes
@@ -82,7 +82,7 @@ def clean_usa_results(results):
     #Change nan to 0 will allow the method to convert the data to integer. 
     #But, we can't tell the different between 0 cases vs no value provided.
     #Retain the value as it is to prevent misinterpretation.
-    # number_results = number_results.fillna(0).astype('Int64')
+    #number_results = number_results.fillna(0).astype('Int64')
     try:
         number_results = change_number_formats(number_results)
     except:
