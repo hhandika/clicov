@@ -244,7 +244,7 @@ def get_usa_covid(states, daily, save):
             print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-            print(f'\nData date and time (24H): {data_date} ET')
+            print(f'\nData last updated (24H): {data_date} ET')
 
     print('\nData provider: The Covid Tracking Project at the Atlantic')
     print('Data license: CC BY-NC-4.0')
