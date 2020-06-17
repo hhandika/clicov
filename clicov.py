@@ -138,7 +138,7 @@ def get_summary(world, countries, save):
             print('\nThe program cannot save the results. A file with the same filename exists.')
     
     print('\nAPI: https://covid19api.com/')
-    print('Data source: CSSE, Johns Hopkins University\n')
+    print('Data sources: CSSE, Johns Hopkins University\n')
 
 #Options to download cases from day one. 
 #Nothing will be displayed if this command is used.
