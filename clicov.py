@@ -237,11 +237,13 @@ def get_usa_covid(states, daily, save):
                 trend_results = search.change_number_formats(trend_results)
             except:
                 pass
+            data_date = results(['lastUpdateEt'])
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+            print(f'\nData date and time (24H): {data_date} ET')
 
     print('\nData provider: The Covid Tracking Project at the Atlantic')
     print('Data license: CC BY-NC-4.0')
