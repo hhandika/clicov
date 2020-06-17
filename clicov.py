@@ -232,7 +232,11 @@ def get_usa_covid(states, daily, save):
                 icu_results = search.change_number_formats(icu_results)
             except:
                 pass
-            trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
+            trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
+            try:
+                trend_results = search.change_number_formats(trend_results)
+            except:
+                pass
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
