@@ -192,9 +192,15 @@ def get_usa_covid(states, daily, save):
             top_results = results.filter(['positive', 'negative'])
             top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
-            hospitalized_results = search.change_number_formats(hospitalized_results)
+            try:
+                hospitalized_results = search.change_number_formats(hospitalized_results)
+            except:
+                pass
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
-            icu_results = search.change_number_formats(icu_results)
+            try:
+                icu_results = search.change_number_formats(icu_results)
+            except:
+                pass
             trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
