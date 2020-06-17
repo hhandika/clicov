@@ -54,4 +54,18 @@ def change_number_formats(tables):
     """
     for column in tables.columns:
         tables[column] = tables[column].apply(lambda x: f'{x:,}')
-        return tables[column]
+    return tables
+
+def clean_usa_results(results):
+    """Function to clean pandas results
+
+    Args:
+        results ([type]): [description]
+    """
+    state = results['state']
+    number_results = results.drop(['state'], axis=1).astype('Int64')
+    # for column in number_results.columns:
+    #     number_results[column] = number_results[column].apply(lambda x: f'{x:,}')
+    #skip thousands separator. Only display as it is.
+    final_results = pd.concat([state, number_results], axis=1)
+    return final_results
