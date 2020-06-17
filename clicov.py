@@ -237,7 +237,7 @@ def get_usa_covid(states, daily, save):
                 trend_results = search.change_number_formats(trend_results)
             except:
                 pass
-            data_date = results(['lastUpdateEt'])
+            data_date = results['lastUpdateEt']
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
