@@ -33,6 +33,12 @@ def main():
 
     clicov download -c [country-iso2-id/slug]
 
+    For usa cases:
+
+    All states current cases: clicov usa
+
+    Per states: clicov usa -s [state-code]
+
     To display country isoid:
 
     All: clicov isoid
@@ -111,11 +117,9 @@ def get_summary(world, countries, save):
         accessed_date = cases['Date'].to_string(index=False)
         accessed_date = accessed_date.replace('T', ' ').replace('Z','')
         top_table = cases.filter(['NewConfirmed','NewRecovered' , 'NewDeaths'])
-        for column in top_table.columns:
-            top_table[column] = top_table[column].apply(lambda x: f'{x:,}')
+        top_table = search.change_number_formats(top_table)
         bottom_table = cases.filter(['TotalConfirmed', 'TotalRecovered', 'TotalDeaths'])
-        for column in bottom_table.columns:
-            bottom_table[column] = bottom_table[column].apply(lambda x: f'{x:,}')
+        bottom_table = search.change_number_formats(bottom_table)
         print(f'{country_name} cases:')
         print(tabulate(top_table, headers='keys', tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         print(tabulate(bottom_table, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
@@ -180,13 +184,17 @@ def get_usa_covid(states, daily, save):
             if save:
                 results.to_csv('results.csv', index=False)
                 print(f'\nDetails results are save in {current_wd} as {filename}')
-            printed_results = results.filter(['state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
-            print("\nAll USA states' cases: ")
-            print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center', floatfmt='.2f'))
+            filtered_results = results.filter(['state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
+            printed_results = search.clean_usa_results(filtered_results)
+            print("\nAll U.S. states' cases:\n")
+            print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         else:
             top_results = results.filter(['positive', 'negative'])
+            top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
+            hospitalized_results = search.change_number_formats(hospitalized_results)
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
+            icu_results = search.change_number_formats(icu_results)
             trend_results = results.filter(['deathIncrease', 'hospitalizedIncrease'])
             print(f'\n{states.upper()} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
