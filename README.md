@@ -1,7 +1,7 @@
-# clicov
-A cli application for accessing covid-19 data.
+<h2 align='center'>clicov</h2>
+<p align='center'>A cli application to quickly view and download covid-19 data.</p>
 
-You can quickly view and/or download covid19 cases from your Terminal. The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
+You can quickly view and/or download covid-19 cases from your Terminal. The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
 
 ## Installation
 
@@ -96,4 +96,4 @@ Learn more about the data here: https://covidtracking.com/data
 Term of use: https://covidtracking.com/license
 
 ## License:
-The app is under MIT license, meaning you are free to do however you want to the app. For the data, please refers to the term of use provided by the data providers.
+The app is under MIT license, meaning you are free to do however you want to the app. For the data usages, please refers to the term of use provided by the data providers.
