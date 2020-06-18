@@ -163,7 +163,10 @@ def download_results(country, filenames):
     results = search.search_cases(url)
     save_files = pd.json_normalize(results)
     try:
-        final_filenames = filenames + country.upper() + '-cases_' + date + '.csv'
+        if filenames is not None:
+            final_filenames = filenames + country.upper() + '-cases_' + date + '.csv'
+        else:
+            final_filenames = country.upper() + '-cases_' + date + '.csv'
         save_files.to_csv(final_filenames, index=False)
         print(f'\nDone! \nThe results are saved in {current_wd} as {final_filenames}')
         print('Details on data usages: https://github.com/CSSEGISandData/COVID-19')
