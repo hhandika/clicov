@@ -4,7 +4,7 @@
     <br><img src='static/screenshot-2.png'></br>
 </p>
 <hr/>
-Clicov is multi-platform command line app to track COVID-19 cases. The data are available the global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
+Clicov is multi-platform command line app to track COVID-19 cases. The data are available for global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
 
 ## Installation
 
@@ -101,7 +101,7 @@ Learn more about the data: https://covidtracking.com/data
 Terms of use: https://covidtracking.com/license
 
 ## License:
-The app is under MIT license, meaning you are free to do however you want to the app. For the data usages, please refers to the terms of use provided by the data providers.
+The app is under<a href='https://github.com/hhandika/clicov/blob/master/LICENSE'>MIT license</a>, meaning you are free to do however you want to the app. For the data usages, please refers to the terms of use provided by the data providers.
 
 ## Contributions
 This project was started as a hobby project. We are welcome for anyone to contribute. Please, send pull requests on <a href='https://github.com/hhandika/clicov/pulls'>Github</a>. 
