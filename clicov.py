@@ -81,7 +81,7 @@ def main():
 @main.command('summary')
 @click.option('--world', '-w', is_flag=True, help='Get summary of global covid19 cases' )
 @click.option('--countries', '-c', default=None, help='Display a country summary cases')
-@click.option('--save', '-sv', is_flag=True, help='Save per country cases in csv file')
+@click.option('--save', '-sv', is_flag=True, help='Save the summary of all-country cases in csv file')
 def get_summary(world, countries, save):
     """
     Get covid-19 most recent global cases and/or by country cases. 
