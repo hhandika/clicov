@@ -3,4 +3,4 @@ __pycache__
 clicov/__pycache__
 clicov/utils/__pycache__
 *.egg-info
-
+.vscode/
