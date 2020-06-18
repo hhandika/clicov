@@ -1,4 +1,4 @@
-<h2 align='center'>clicov</h2>
+<h3 align='center'>clicov</h3>
 <p align='center'>A cli application to quickly view and download covid-19 data.</p>
 
 You can quickly view and/or download covid-19 cases from your Terminal. The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
