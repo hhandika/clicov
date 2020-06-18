@@ -155,7 +155,7 @@ def download_results(country):
     clicov download -c id
     """
     queries = search.clean_user_inputs(country)
-    url = 'https://api.covid19api.com/total/country/' + queries
+    url = 'https://api.covid19api.com/total/dayone/country/' + queries
     results = search.search_cases(url)
     save_files = pd.json_normalize(results)
     try:
@@ -228,6 +228,10 @@ def get_usa_covid(states, daily, save):
             try:
                 hospitalized_results = search.change_number_formats(hospitalized_results)
                 icu_results = search.change_number_formats(icu_results)
+            except:
+                pass
+            #Trend results need to be separated. Otherwise function does not work. I don't know why.
+            try:
                 trend_results = search.change_number_formats(trend_results)
             except:
                 pass
