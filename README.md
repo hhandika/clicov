@@ -1,7 +1,7 @@
 <h3 align='center'>clicov</h3>
 <p align='center'>Quickly view and/or download COVID-19 case data from your Terminal.
     <br><a href='https://github.com/hhandika/clicov/issues'>Report issues</a></br>
-    <br><img src='static/screenshot-1.png'></br>
+    <br><img src='static/screenshot-2.png'></br>
 </p>
 <hr/>
 The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
@@ -52,7 +52,7 @@ clicov download -c [country-iso2-code]
 ```
 All files will be saved in a comma-separated values (.csv) format.
 
-## The U.S Cases
+## U.S Cases
 
 This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the U.S. cases in a country basis use the 'clicov summary' command instead.
 
