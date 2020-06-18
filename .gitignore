@@ -1,5 +1,6 @@
 _DStore
 __pycache__
-utils/__pycache__
+clicov/__pycache__
+clicov/utils/__pycache__
 *.egg-info
 
