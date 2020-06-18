@@ -223,18 +223,11 @@ def get_usa_covid(states, daily, save):
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
 
             #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
-            try:
-                hospitalized_results = search.change_number_formats(hospitalized_results)
-            except:
-                pass
-
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
-            try:
-                icu_results = search.change_number_formats(icu_results)
-            except:
-                pass
             trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
             try:
+                hospitalized_results = search.change_number_formats(hospitalized_results)
+                icu_results = search.change_number_formats(icu_results)
                 trend_results = search.change_number_formats(trend_results)
             except:
                 pass
