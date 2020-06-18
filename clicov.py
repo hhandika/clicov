@@ -220,7 +220,7 @@ def get_usa_covid(states, daily, save):
             if save:
                 results.to_csv('results.csv', index=False)
                 print(f'\nDetails results are save in {current_wd} as {filename}')
-            filtered_results = results.filter(['state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
+            filtered_results = results.filter(['date','state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
             printed_results = search.clean_usa_results(filtered_results)
             print("\nAll U.S. states' cases:\n")
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
@@ -232,10 +232,11 @@ def get_usa_covid(states, daily, save):
                 top_results = results.filter(['positive', 'negative'])
                 top_results = search.change_number_formats(top_results)
                 hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
-                #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
                 icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
                 trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
-                #Has to try separately. Otherwise function does not work. Not sure why. Could be data type issues from the source.
+                #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
+                #Has to try separately. Otherwise function does not work. Fill nan with zero will resolve the issue.
+                #But, will affect data interpretation. Decided to just try for each table.
                 try:
                     hospitalized_results = search.change_number_formats(hospitalized_results)
                 except:
@@ -249,6 +250,7 @@ def get_usa_covid(states, daily, save):
                 except:
                     pass
                 data_date = results.iloc[0]['lastUpdateEt']
+                #Iloc may be much better here. Remove to_string methods.
                 # data_date = data_date.to_string(index=False)
                 print(f'\n{state_names} cases:\n')
                 print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
