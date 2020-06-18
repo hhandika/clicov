@@ -222,16 +222,18 @@ def get_usa_covid(states, daily, save):
             top_results = results.filter(['positive', 'negative'])
             top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
-
             #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
             icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
             trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
+            #Has to try separately. Otherwise function does not work. Not sure why. Could be data type issues.
             try:
                 hospitalized_results = search.change_number_formats(hospitalized_results)
+            except:
+                pass
+            try:
                 icu_results = search.change_number_formats(icu_results)
             except:
                 pass
-            #Trend results need to be separated. Otherwise function does not work. I don't know why.
             try:
                 trend_results = search.change_number_formats(trend_results)
             except:
