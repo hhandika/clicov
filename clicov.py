@@ -1,6 +1,7 @@
 import datetime as dt
 import json
 import os
+import sys
 
 import click
 import pandas as pd
@@ -167,7 +168,7 @@ def download_results(country, cases, filenames):
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
  
-@main.command('usa', help='Get selected state covid-19 cases')
+@main.command('usa', help='Track U.S states covid-19 cases')
 @click.option('--states', '-s', default='all', help='Select state based on state code')
 @click.option('--daily', '-d', is_flag=True, help='States covid19 data from dayone')
 @click.option('--save', '-sv', is_flag=True, help='Save results to csv')
@@ -195,7 +196,9 @@ def get_usa_covid(states, daily, save):
     clicov usa -s ny -d
 
     """
-    if states != 'all':
+    if daily and states == 'all':
+        sys.exit('You need to select a state for daily case data')
+    elif states != 'all':
         queries = search.clean_user_inputs(states)
         url = search.get_url_usa_cases(queries, daily)
     else:
@@ -206,7 +209,8 @@ def get_usa_covid(states, daily, save):
     if daily:
         filename = 'allstates-cases_' + date + '.csv'
         results.to_csv('results.csv', index=False)
-        print(f'\nResults are save in {current_wd} as {filename}')
+        print('\nDownload only!')
+        print(f'Results are save in {current_wd} as {filename}')
     else:
         if states == 'all':
             filename = 'allstates-cases_' + date + '.csv'
@@ -218,34 +222,37 @@ def get_usa_covid(states, daily, save):
             print("\nAll U.S. states' cases:\n")
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         else:
-            state_names = search.get_state_names(states)
-            top_results = results.filter(['positive', 'negative'])
-            top_results = search.change_number_formats(top_results)
-            hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
-            #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
-            icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
-            trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
-            #Has to try separately. Otherwise function does not work. Not sure why. Could be data type issues.
-            try:
-                hospitalized_results = search.change_number_formats(hospitalized_results)
-            except:
-                pass
-            try:
-                icu_results = search.change_number_formats(icu_results)
-            except:
-                pass
-            try:
-                trend_results = search.change_number_formats(trend_results)
-            except:
-                pass
-            data_date = results.iloc[0]['lastUpdateEt']
-            # data_date = data_date.to_string(index=False)
-            print(f'\n{state_names} cases:\n')
-            print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-            print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-            print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-            print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
-            print(f'\nData last updated (24H): {data_date} ET')
+            if save:
+                sys.exit('Only daily cases for each state and summary of all state cases can be saved')
+            else:
+                state_names = search.get_state_names(states)
+                top_results = results.filter(['positive', 'negative'])
+                top_results = search.change_number_formats(top_results)
+                hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
+                #Try to change numbers format with thousand separators. Skip it, if the value cannot be converted.
+                icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
+                trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
+                #Has to try separately. Otherwise function does not work. Not sure why. Could be data type issues from the source.
+                try:
+                    hospitalized_results = search.change_number_formats(hospitalized_results)
+                except:
+                    pass
+                try:
+                    icu_results = search.change_number_formats(icu_results)
+                except:
+                    pass
+                try:
+                    trend_results = search.change_number_formats(trend_results)
+                except:
+                    pass
+                data_date = results.iloc[0]['lastUpdateEt']
+                # data_date = data_date.to_string(index=False)
+                print(f'\n{state_names} cases:\n')
+                print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                print(f'\nData last updated (24H): {data_date} ET')
 
     print('\nData provider: The Covid Tracking Project at the Atlantic')
     print('Data license: CC BY-NC-4.0')
