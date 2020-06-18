@@ -20,7 +20,11 @@ def main():
     """
     clicov 0.0.3
 
-    A simple command line program to access covid-19 data.
+    Quickly view and/or download covid19 cases.
+    Available for global cases and per country cases.
+    The U.S cases are available in per state basis and include positive and negative testing results.
+
+    ========================
 
     Usages:
 
@@ -30,27 +34,23 @@ def main():
 
     Selected country: clicov summary -c [country-iso2-id]
 
+    ----------------------------------------------------
+
     To download country cases from day one:
 
-    clicov download -c [country-iso2-id/slug]
+    clicov download -c [country-iso2-id]
 
-    For usa cases:
+    For the U.S. cases:
 
-    All states current cases: clicov usa
+    Summary of all-state current cases: clicov usa
 
     Per states: clicov usa -s [state-code]
 
-    To display country isoid:
+    ----------------------------------------------------
 
-    All: clicov isoid
+    Don't know the country ISO2 id? Try:
 
-    For country with one word, you could just type the country name.
-
-    If more, use underscore.
-    
-    clicov isoid -c [country-name]
-
-    clicov isoid -c united_states
+    clicov id
 
     Popular country  ISO2 codes:
 
@@ -144,10 +144,10 @@ def get_summary(world, countries, save):
 #Options to download cases from day one. 
 #Nothing will be displayed if this command is used.
 #The function is a saved to csv only option.    
-@main.command('download', help='Get country data from day one')
+@main.command('download', help='Download country data from day one')
 @click.option('--country', '-c', help='Select country name')
 @click.option('--filenames', '-f', default=None, help='Add a custom filename')
-def download_results(country, cases, filenames):
+def download_results(country, filenames):
     """
     Download country covid-19 data from day one.
     Use slugs or id to choose the country.
