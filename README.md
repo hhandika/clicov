@@ -4,11 +4,11 @@
     <br><img src='static/screenshot-2.png'></br>
 </p>
 <hr/>
-The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
+Clicov is multi-platform command line app to track COVID-19 cases. The data are available the global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
 
 ## Installation
 
-Installation from github:
+From github:
 
 ```
 git clone https://github.com/hhandika/clicov.git
@@ -16,7 +16,8 @@ cd clicov/
 pip install --editable .
 ```
 
-## Global Cases
+## Usages
+### Global Cases
 
 To view summary of global cases:
 
@@ -52,7 +53,7 @@ clicov download -c [country-iso2-code]
 ```
 All files will be saved in a comma-separated values (.csv) format.
 
-## U.S Cases
+### U.S Cases
 
 This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the U.S. cases in a country basis use the 'clicov summary' command instead.
 
@@ -89,9 +90,7 @@ clicov usa -s [state-code] -sv
 
 Data aggregation: https://covid19api.com/
 
-Data source: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
-
-Terms of use: https://covidtracking.com/license
+Data sources and terms of use: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
 
 ### U.S. state cases
 
