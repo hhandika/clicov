@@ -8,7 +8,7 @@ import pandas as pd
 import requests
 from tabulate import tabulate
 
-from utils import search
+from clicov.utils import search
 
 #Get date and current working directory for saving files.
 current_wd = os.getcwd()
