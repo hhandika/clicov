@@ -1,7 +1,8 @@
 <h3 align='center'>clicov</h3>
-<p align='center'>A cli application to quickly view and download covid-19 data.</p>
+<p align='center'>Quickly view and/or download COVID-19 case data from your Terminal.</p>
+<a align='center', href='https://github.com/hhandika/clicov/issues'>Report issues</a>
 <hr/>
-You can quickly view and/or download covid-19 cases from your Terminal. The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
+The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
 
 ## Installation
 
@@ -25,6 +26,9 @@ To view summary of user selected country cases, use the command -c and add the c
 
 ```
 clicov -c [country-iso2-code]
+
+#To view country iso2 codes:
+clicov id
 
 #For example, US cases:
 clicov -c us
@@ -87,7 +91,7 @@ Data source: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for
 
 Term of use: https://covidtracking.com/license
 
-### U.S. States cases
+### U.S. state cases
 
 Data aggregation and providers: <a href='https://covidtracking.com/api'>the COVID Tracking Project at the Atlantic</a>
 
@@ -97,3 +101,7 @@ Term of use: https://covidtracking.com/license
 
 ## License:
 The app is under MIT license, meaning you are free to do however you want to the app. For the data usages, please refers to the term of use provided by the data providers.
+
+## Contributions
+This project was started a before bed project. We are welcome for anyone to contribute. Please send pull request on <a href='https://github.com/hhandika/clicov/pulls'>Github</a>. 
+ 
