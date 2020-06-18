@@ -84,7 +84,7 @@ def main():
 @click.option('--save', '-sv', is_flag=True, help='Save the summary of all-country cases in csv file')
 def get_summary(world, countries, save):
     """
-    Get COVID-19 the most recent global cases and/or by country cases. 
+    Get the most recent global cases and/or by country cases. 
     
     To display a country summary cases, use an ISO2 country code
 
