@@ -210,18 +210,21 @@ def get_usa_covid(states, daily, save):
     results = pd.json_normalize(results)
 
     if daily:
-        filename = 'allstates-cases_' + date + '.csv'
-        results.to_csv('results.csv', index=False)
-        print('\nDownload only!')
-        print(f'Results are save in {current_wd} as {filename}')
+        try:
+            filename = 'allstates-cases_' + date + '.csv'
+            results.to_csv('results.csv', index=False)
+            print('\nDownload only!')
+            print(f'Results are save in {current_wd} as {filename}')
+        except PermissionError:
+            print('\nThe program cannot save the results. A file with the same filename exists.')
     else:
         if states == 'all':
             filename = 'allstates-cases_' + date + '.csv'
             if save:
                 results.to_csv('results.csv', index=False)
                 print(f'\nDetails results are save in {current_wd} as {filename}')
-            filtered_results = results.filter(['date','state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease' ])
-            printed_results = search.clean_usa_results(filtered_results)
+            filtered_results = results.filter(['date','state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease'])
+            printed_results  = search.clean_usa_results(filtered_results)
             print("\nAll U.S. states' cases:\n")
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         else:

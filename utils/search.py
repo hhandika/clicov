@@ -76,8 +76,8 @@ def clean_usa_results(results):
     Args:
         results : pass pandas table
     """
-    state = results['state']
-    number_results = results.drop(['state'], axis=1)
+    string_results = results.filter(['date','state'])
+    number_results = results.drop(['date','state'], axis=1)
     #The api provided some data in float that display .0 in the value.
     #Change nan to 0 will allow the method to convert the data to integer. 
     #But, we can't tell the different between 0 cases vs no value provided.
@@ -87,7 +87,7 @@ def clean_usa_results(results):
         number_results = change_number_formats(number_results)
     except:
         pass
-    final_results = pd.concat([state, number_results], axis=1)
+    final_results = pd.concat([string_results, number_results], axis=1)
     return final_results
 
 def get_state_names(state_code):
