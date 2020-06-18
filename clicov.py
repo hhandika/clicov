@@ -217,6 +217,7 @@ def get_usa_covid(states, daily, save):
             print("\nAll U.S. states' cases:\n")
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         else:
+            state_names = search.get_state_names(states)
             top_results = results.filter(['positive', 'negative'])
             top_results = search.change_number_formats(top_results)
             hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
@@ -237,9 +238,9 @@ def get_usa_covid(states, daily, save):
                 trend_results = search.change_number_formats(trend_results)
             except:
                 pass
-            data_date = results['lastUpdateEt']
-            data_date = data_date.to_string(index=False)
-            print(f'\n{states.upper()} cases:\n')
+            data_date = results.iloc[0]['lastUpdateEt']
+            # data_date = data_date.to_string(index=False)
+            print(f'\n{state_names} cases:\n')
             print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
             print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
