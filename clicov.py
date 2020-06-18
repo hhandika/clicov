@@ -20,7 +20,7 @@ def main():
     """
     clicov 0.0.3
 
-    Quickly view and/or download covid19 cases.
+    Quickly view and/or download COVID-19 cases.
     Available for global cases and per country cases.
     The U.S cases are available in per state basis and include positive and negative testing results.
 
@@ -84,9 +84,9 @@ def main():
 @click.option('--save', '-sv', is_flag=True, help='Save the summary of all-country cases in csv file')
 def get_summary(world, countries, save):
     """
-    Get covid-19 most recent global cases and/or by country cases. 
+    Get COVID-19 the most recent global cases and/or by country cases. 
     
-    To display a country summary cases, use a slug name or an ISO2 country code
+    To display a country summary cases, use an ISO2 country code
 
     Example:
 
@@ -140,16 +140,18 @@ def get_summary(world, countries, save):
     
     print('\nAPI: https://covid19api.com/')
     print('Data sources: CSSE, Johns Hopkins University\n')
+    print('Details on data usages: https://github.com/CSSEGISandData/COVID-19')
+    
 
 #Options to download cases from day one. 
 #Nothing will be displayed if this command is used.
 #The function is a saved to csv only option.    
-@main.command('download', help='Download country data from day one')
+@main.command('download', help='Download a country COVID-19 data from day one')
 @click.option('--country', '-c', help='Select country name')
 @click.option('--filenames', '-f', default=None, help='Add a custom filename')
 def download_results(country, filenames):
     """
-    Download country covid-19 data from day one.
+    Download country COVID-19 data from day one.
     Use slugs or id to choose the country.
 
     Commands:
@@ -164,17 +166,18 @@ def download_results(country, filenames):
         final_filenames = filenames + country.upper() + '-cases_' + date + '.csv'
         save_files.to_csv(final_filenames, index=False)
         print(f'\nDone! \nThe results are saved in {current_wd} as {final_filenames}')
+        print('Details on data usages: https://github.com/CSSEGISandData/COVID-19')
     except PermissionError:
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
  
-@main.command('usa', help='Track U.S states covid-19 cases')
+@main.command('usa', help='Track U.S states COVID-19 cases')
 @click.option('--states', '-s', default='all', help='Select state based on state code')
-@click.option('--daily', '-d', is_flag=True, help='States covid19 data from dayone')
+@click.option('--daily', '-d', is_flag=True, help='States COVID-19 data from dayone')
 @click.option('--save', '-sv', is_flag=True, help='Save results to csv')
 def get_usa_covid(states, daily, save):
     """
-    Command to dig dive into the U.S covid19 cases. 
+    A command to dig dive into the U.S COVID-19 cases. 
     You can display or download the data.
     Data is presented in state by state cases.
     For summary of the U.S covid19 cases, use the 'summary' command. 
