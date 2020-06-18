@@ -3,7 +3,7 @@ A cli application for accessing covid-19 data.
 
 You can quickly view and/or download covid19 cases from your Terminal. The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
 
-##Installation
+## Installation
 
 Installation from github:
 
@@ -13,7 +13,7 @@ cd clicov/
 pip install --editable .
 ```
 
-##Global Cases
+## Global Cases
 
 To view summary of global cases:
 
@@ -46,7 +46,7 @@ clicov download -c [country-iso2-code]
 ```
 All files will be saved in a comma-separated values (.csv) format.
 
-##The U.S Cases
+## The U.S Cases
 
 This option is available dig dive into the U.S state cases. You can view a summary of all-state cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For summary of the U.S. cases in a country basis use the 'summary' command instead.
 
@@ -77,15 +77,15 @@ To download per state cases from day one:
 clicov usa -s [state-code] -sv
 ```
 
-##Data Providers
+## Data Providers
 
-###Global cases
+### Global cases
 
 Data aggregation: https://covid19api.com/
 Data source: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
 Term of use: https://covidtracking.com/license
 
-###U.S. States cases
+### U.S. States cases
 
 Data aggregation and providers: <a href='https://covidtracking.com/api'>the COVID Tracking Project at the Atlantic</a>
 Learn more about the data here: https://covidtracking.com/data
