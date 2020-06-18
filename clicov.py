@@ -145,7 +145,8 @@ def get_summary(world, countries, save):
 #The function is a saved to csv only option.    
 @main.command('download', help='Get country data from day one')
 @click.option('--country', '-c', help='Select country name')
-def download_results(country):
+@click.option('--filenames', '-f', default=None, help='Add a custom filename')
+def download_results(country, cases, filenames):
     """
     Download country covid-19 data from day one.
     Use slugs or id to choose the country.
@@ -159,9 +160,9 @@ def download_results(country):
     results = search.search_cases(url)
     save_files = pd.json_normalize(results)
     try:
-        filename = country.upper() + '-cases_' + date + '.csv'
-        save_files.to_csv(filename, index=False)
-        print(f'\nDone! \nThe results are saved in {current_wd} as {filename}')
+        final_filenames = filenames + country.upper() + '-cases_' + date + '.csv'
+        save_files.to_csv(final_filenames, index=False)
+        print(f'\nDone! \nThe results are saved in {current_wd} as {final_filenames}')
     except PermissionError:
         print('\nThe program cannot save the results. A file with the same filename exists.')
 
