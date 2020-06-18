@@ -48,7 +48,7 @@ All files will be saved in a comma-separated values (.csv) format.
 
 ## The U.S Cases
 
-This option is available dig dive into the U.S state cases. You can view a summary of all-state cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For summary of the U.S. cases in a country basis use the 'summary' command instead.
+This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the U.S. cases in a country basis use the 'clicov summary' command instead.
 
 To view all states' current  cases:
 
@@ -82,14 +82,18 @@ clicov usa -s [state-code] -sv
 ### Global cases
 
 Data aggregation: https://covid19api.com/
+
 Data source: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
+
 Term of use: https://covidtracking.com/license
 
 ### U.S. States cases
 
 Data aggregation and providers: <a href='https://covidtracking.com/api'>the COVID Tracking Project at the Atlantic</a>
+
 Learn more about the data here: https://covidtracking.com/data
+
 Term of use: https://covidtracking.com/license
 
-##License:
+## License:
 The app is under MIT license, meaning you are free to do however you want to the app. For the data, please refers to the term of use provided by the data providers.
