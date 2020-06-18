@@ -90,19 +90,19 @@ Data aggregation: https://covid19api.com/
 
 Data source: <a href='https://github.com/CSSEGISandData/COVID-19'>the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</a>
 
-Term of use: https://covidtracking.com/license
+Terms of use: https://covidtracking.com/license
 
 ### U.S. state cases
 
 Data aggregation and providers: <a href='https://covidtracking.com/api'>the COVID Tracking Project at the Atlantic</a>
 
-Learn more about the data here: https://covidtracking.com/data
+Learn more about the data: https://covidtracking.com/data
 
-Term of use: https://covidtracking.com/license
+Terms of use: https://covidtracking.com/license
 
 ## License:
-The app is under MIT license, meaning you are free to do however you want to the app. For the data usages, please refers to the term of use provided by the data providers.
+The app is under MIT license, meaning you are free to do however you want to the app. For the data usages, please refers to the terms of use provided by the data providers.
 
 ## Contributions
-This project was started a before bed project. We are welcome for anyone to contribute. Please send pull request on <a href='https://github.com/hhandika/clicov/pulls'>Github</a>. 
+This project was started as a hobby project. We are welcome for anyone to contribute. Please, send pull requests on <a href='https://github.com/hhandika/clicov/pulls'>Github</a>. 
  
