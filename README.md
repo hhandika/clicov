@@ -1,7 +1,7 @@
 <h3 align='center'>clicov</h3>
 <p align='center'>Quickly view and/or download COVID-19 case data from your Terminal.
     <br><a href='https://github.com/hhandika/clicov/issues'>Report issues</a></br>
-    <br><img href='static/screenshot-1.png'></br>
+    <br><img src='static/screenshot-1.png'></br>
 </p>
 <hr/>
 The data are available for global cases and per country cases. The U.S cases are available in per state basis and include positive and negative testing results.
