@@ -3,6 +3,7 @@
     <br><a href='https://github.com/hhandika/clicov/issues'>Report issues</a></br>
     <!-- <br><img alt='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png' src='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png'></br> -->
     [![PyPI version shields.io](https://img.shields.io/pypi/v/clicov)](https://pypi.org/project/clicov/)
+    [![PyPI license](https://img.shields.io/github/license/hhandika/clicov)](https://github.com/hhandika/clicov/)
 </p>
 <hr/>
 Clicov is multi-platform command line app to track COVID-19 cases. The data are available for global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
