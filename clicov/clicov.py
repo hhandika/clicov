@@ -18,7 +18,7 @@ date = dt.datetime.today().strftime("%Y-%m-%d")
 @click.group()
 def main():
     """
-    clicov 0.0.3
+    clicov
 
     Quickly view and/or download COVID-19 cases.
     Available for global cases and per country cases.
