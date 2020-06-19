@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='clicov',
-    version='0.0.6',
+    version='0.0.7',
     author= 'Heru Handika',
     author_email= 'hhandika.us@gmail.com',
     description= 'Command line application to track COVID-19 cases',
