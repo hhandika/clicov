@@ -21,7 +21,10 @@ setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        'Click', 'pandas', 'requests', 'tabulate'
+        'Click', 
+        'pandas', 
+        'requests', 
+        'tabulate'
     ],
     entry_points='''
         [console_scripts]
