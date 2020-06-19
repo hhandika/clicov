@@ -21,18 +21,20 @@ from clicov.utils import search
 current_wd = os.getcwd()
 date = dt.datetime.today().strftime("%Y-%m-%d")
 
-#Setup group function for click commands. 
-#It does nothing except to pass help messages when clicov command is invoked. 
+#Setup a group function for click commands. 
+#It does nothing except to pass help messages when the clicov command is invoked. 
 @click.group()
 def main():
     """
     clicov
 
     Quickly view and/or download COVID-19 cases.
+    
     Available for global cases and per country cases.
-    The U.S cases are available in per state basis and include positive and negative testing results.
+    The U.S cases are available in per state basis
+    and include positive and negative testing results.
 
-    ========================
+    ====================================================
 
     Usages:
 
@@ -84,6 +86,7 @@ def main():
 
     United States: US
 
+    -----------------------------------------------------
     """
     pass
 
@@ -185,7 +188,7 @@ def download_results(country, filenames):
 
  
 @main.command('usa', help='Track U.S states COVID-19 cases')
-@click.option('--states', '-s', default='all', help='Select state based on state code')
+@click.option('--states', '-s', default='all', help='Select state based on state codes')
 @click.option('--daily', '-d', is_flag=True, help='States COVID-19 data from dayone')
 @click.option('--save', '-sv', is_flag=True, help='Save results to csv')
 def get_usa_covid(states, daily, save):
