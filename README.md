@@ -2,7 +2,7 @@
 <p align='center'>Quickly view and/or download COVID-19 case data from your Terminal.
     <br><a href='https://github.com/hhandika/clicov/issues'>Report issues</a></br>
     <!-- <br><img alt='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png' src='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png'></br> -->
-    <br><a href="#"><img src="https://img.shields.io/pypi/v/clicov" alt="PyPI version" height="18"></a>
+    <br><img src="https://img.shields.io/pypi/v/clicov" alt="PyPI version">
 <a href='https://github.com/hhandika/clicov/blob/master/LICENSE'><img src='https://img.shields.io/github/license/hhandika/clicov'></br></a>
 </p>
 <hr/>
