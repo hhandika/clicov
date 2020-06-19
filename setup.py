@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setup(
     name='clicov',
-    version='0.0.8',
+    version='0.0.9',
     author= 'Heru Handika',
     author_email= 'hhandika.us@gmail.com',
-    description= 'A command line application to track COVID-19 cases',
+    description= 'A command-line application to track COVID-19 cases',
     long_description= long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/hhandika/clicov',
