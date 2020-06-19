@@ -51,6 +51,8 @@ def main():
     Don't know the country ISO2 id? Try:
 
     clicov id
+    
+    ----------------------------------------------------
 
     Popular country  ISO2 codes:
 
