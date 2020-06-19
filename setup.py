@@ -8,7 +8,7 @@ setup(
     version='0.0.7',
     author= 'Heru Handika',
     author_email= 'hhandika.us@gmail.com',
-    description= 'Command line application to track COVID-19 cases',
+    description= 'A command line application to track COVID-19 cases',
     long_description= long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/hhandika/clicov',
