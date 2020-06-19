@@ -15,16 +15,19 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        'Programming Language :: Python :: 3.6',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Intended Audience :: End Users/Desktop',
+        'Intended Audience :: Education',
+        'Intended Audience :: Science/Research',
     ],
     python_requires='>=3.6',
     install_requires=[
         'Click', 
         'pandas', 
         'requests', 
-        'tabulate'
+        'tabulate',
     ],
     entry_points='''
         [console_scripts]
