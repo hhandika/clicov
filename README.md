@@ -41,7 +41,7 @@ To view summary of a selected country's cases, use the command -c and add the co
 clicov -c [country-iso2-code]
 ```
 
-You can check iso2 codes using for all countries using this command:
+You can check iso2 codes using this command:
 
 ```
 clicov id
