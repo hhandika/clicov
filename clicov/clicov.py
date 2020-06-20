@@ -29,7 +29,7 @@ def main():
     clicov
 
     Quickly view and/or download COVID-19 cases.
-    
+
     Available for global cases and per country cases.
     The U.S cases are available in per state basis
     and include positive and negative testing results.
