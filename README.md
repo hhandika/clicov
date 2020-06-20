@@ -18,7 +18,7 @@ Clicov is a multi-platform command-line application to track COVID-19 cases. The
 
 ## Installation
 
-For MacOS and Linux, you could install clicov directly from pip. You may also consider to setup virtual environment using <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands'>conda</a> or <a href='https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/'>pip</a> virtual environment. To install clicov, use this command in your Terminal shell:
+For MacOS and Linux, you could install clicov directly from pip. You may also consider to setup virtual environment using <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands'>conda</a> or <a href='https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/'>pip</a> virtual environments. To install clicov, use this command in your Terminal shell:
 
 ```
 pip install clicov
