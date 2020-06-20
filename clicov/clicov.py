@@ -248,8 +248,9 @@ def get_usa_covid(states, daily, save):
                 sys.exit('Only daily cases for each state and summary of all state cases can be saved.')
             else:
                 state_names = search.get_state_names(states)
-                top_results = results.filter(['positive', 'negative'])
-                top_results = search.change_number_formats(top_results)
+                top_results = results.filter(['positive', 'negative', 'recovered','death'])
+                # outcome_results = results.filter(['recovered','death'])
+                # outcome_results = search.change_number_formats(outcome_results)
                 hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
                 icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
                 trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
@@ -257,6 +258,7 @@ def get_usa_covid(states, daily, save):
                 #Has to try separately. Otherwise function does not work. Fill nan with zero will resolve the issue.
                 #But, will affect data interpretation. Decided to just try for each table.
                 try:
+                    top_results = search.change_number_formats(top_results)
                     hospitalized_results = search.change_number_formats(hospitalized_results)
                 except:
                     pass
@@ -273,6 +275,7 @@ def get_usa_covid(states, daily, save):
                 # data_date = data_date.to_string(index=False)
                 print(f'\n{state_names} cases:\n')
                 print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                # print(tabulate(outcome_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
