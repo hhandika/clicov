@@ -39,35 +39,45 @@ To view summary of user selected country cases, use the command -c and add the c
 
 ```
 clicov -c [country-iso2-code]
+```
 
-#To view country iso2 codes:
+You can check iso2 codes using for all countries using this command:
+
+```
 clicov id
+```
 
-#For example, US cases:
+For example, to view total U.S. cases:
+
+```
 clicov -c us
+```
 
-#You can chain it with global cases:
+You can also chain the command with global cases:
+
+```
 clicov -w -c us
 ```
 
-To download a summary of all countries' current cases:
+You can also all countries' current cases into a spreadsheet:
 
 ```
 clicov summary -sv
 ```
 
-Per country cases from day one is also available for download:
+Cases from day one for a country is also available for download:
 
 ```
 clicov download -c [country-iso2-code]
 ```
-All files will be saved in a comma-separated values (.csv) format.
+
+All files will be saved in your current working directory as a comma-separated values (.csv) format.
 
 ### U.S Cases
 
-This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the U.S. cases in a country basis use the 'clicov summary' command instead.
+This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For total U.S. cases, use 'clicov summary -c us' command instead.
 
-To view all states' current  cases:
+To view a list of all states' current  cases:
 
 ```
 clicov usa
@@ -77,8 +87,11 @@ To view current cases per state:
 
 ```
 clicov usa -s [state-code]
+```
 
-#For New York
+For example, to view New York cases:
+
+```
 clicov usa -s ny
 ```
 
@@ -88,7 +101,7 @@ To download all states' current cases:
 clicov usa -sv
 ```
 
-To download per state cases from day one:
+To download cases from day one for a selected state:
 
 ```
 clicov usa -s [state-code] -sv
