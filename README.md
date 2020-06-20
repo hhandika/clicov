@@ -59,7 +59,7 @@ You can also chain the command with global cases:
 clicov -w -c us
 ```
 
-You can also all countries' current cases into a spreadsheet:
+You can also save all countries' current cases into a spreadsheet:
 
 ```
 clicov summary -sv
