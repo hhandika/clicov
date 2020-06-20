@@ -75,7 +75,7 @@ All files will be saved in your current working directory as a comma-separated v
 
 ### U.S Cases
 
-This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For total U.S. cases, use 'clicov summary -c us' command instead.
+This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the total U.S. cases, use 'clicov summary -c us' command instead.
 
 To view a list of all states' current  cases:
 
