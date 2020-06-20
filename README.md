@@ -35,7 +35,7 @@ To view summary of global cases:
 clicov -w
 ```
 
-To view summary of user selected country cases, use the command -c and add the country two-letter <a href='https://www.iban.com/country-codes'>ISO2 code</a>. You can also use the country name, but ISO2 codes are less prone to errors, particularly for multi-word country names.
+To view summary of a selected country cases, use the command -c and add the country two-letter <a href='https://www.iban.com/country-codes'>ISO2 code</a>. You can also use the country name, but ISO2 codes are less prone to errors, particularly for multi-word country names.
 
 ```
 clicov -c [country-iso2-code]
