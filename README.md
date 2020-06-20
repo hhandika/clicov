@@ -24,7 +24,7 @@ For MacOS and Linux, you could install clicov directly from pip. You may also co
 pip install clicov
 ```
 
-For Windows, you could install clicov on <a href= https://docs.microsoft.com/en-us/windows/wsl/install-win10>Windows Subsystem for Linux</a>. The installation process is similar as above. Alternatively, you could also install it natively on Windows. One way to install it is using Anaconda/Miniconda. Instructions to install it are available <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html'>here</a>. Download Anaconda/Miniconda for python version 3.7 or above. After installation, open Anaconda command prompt. Then, install clicov by following the installation procedure for Linux and MacOS above.
+For Windows, you could install clicov on <a href= https://docs.microsoft.com/en-us/windows/wsl/install-win10>Windows Subsystem for Linux</a>. The installation process is similar as above. Alternatively, you could also install it natively on Windows. One way to install it is using Anaconda/Miniconda. If you don't have either application yet, the instructions to install them are available <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html'>here</a>. Download Anaconda/Miniconda for python version 3.7 or above. After installation, open Anaconda command prompt. Then, install clicov by following the installation procedure for Linux and MacOS above.
 
 ## Usages
 ### Global Cases
