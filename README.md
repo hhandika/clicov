@@ -14,13 +14,17 @@
     </br>
 </p>
 <hr/>
-Clicov is multi-platform command line app to track COVID-19 cases. The data are available for global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
+Clicov is a multi-platform command-line application to track COVID-19 cases. The data are available for global and per country cases. The U.S cases are also available in per state basis and include positive and negative testing results.
 
 ## Installation
+
+For MacOS and Linux, you could install clicov directly from pip. You may also consider to setup virtual environment using <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands'>conda</a> or <a href='https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/'>pip</a> virtual environment. To install clicov, use this command in your Terminal shell:
 
 ```
 pip install clicov
 ```
+
+For Windows, you could install clicov on <a href= https://docs.microsoft.com/en-us/windows/wsl/install-win10>Windows Subsystem for Linux</a>. The installation process is similar as above. Alternatively, you could also install it natively on Windows. One way to install it is using Anaconda/Miniconda. Instructions to install conda are available <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html'>here</a>. Download Anaconda/Miniconda for python version 3.7 or above. After installation, open Anaconda command prompt. Then, install clicov by following the installation procedure for Linux and MacOS above.
 
 ## Usages
 ### Global Cases
