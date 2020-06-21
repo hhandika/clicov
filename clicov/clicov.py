@@ -1,3 +1,10 @@
+"""Clicov command handlers
+
+This script handle the command line inputs. 
+Clicov uses the Click library for the command lines. 
+It acts as decorators for each function.
+"""
+
 import datetime as dt
 import json
 import os
@@ -14,17 +21,20 @@ from clicov.utils import search
 current_wd = os.getcwd()
 date = dt.datetime.today().strftime("%Y-%m-%d")
 
-#Setup group function for click commands. 
+#Setup a group function for click commands. 
+#It does nothing except to pass help messages when the clicov command is invoked. 
 @click.group()
 def main():
     """
     clicov
 
     Quickly view and/or download COVID-19 cases.
-    Available for global cases and per country cases.
-    The U.S cases are available in per state basis and include positive and negative testing results.
 
-    ========================
+    Available for global cases and per country cases.
+    The U.S cases are available in per state basis
+    and include positive and negative testing results.
+
+    ====================================================
 
     Usages:
 
@@ -76,6 +86,7 @@ def main():
 
     United States: US
 
+    -----------------------------------------------------
     """
     pass
 
@@ -108,7 +119,7 @@ def get_summary(world, countries, save):
         total_recovered = global_cases['TotalRecovered']
         total_death = global_cases['TotalDeaths']
         global_cases = results['Global']
-        print('\nGlobal Cases:\n')
+        print('\nGlobal cases:\n')
         print(f'New confirmed: {new_confirmed:,}')
         print(f'New recovered: {new_recovered:,}')
         print(f'New deaths: {new_deaths:,}')
@@ -141,8 +152,8 @@ def get_summary(world, countries, save):
             print('\nThe program cannot save the results. A file with the same filename exists.')
     
     print('\nAPI: https://covid19api.com/')
-    print('Data sources: CSSE, Johns Hopkins University\n')
-    print('Details on data usages: https://github.com/CSSEGISandData/COVID-19')
+    print('Data sources: CSSE, Johns Hopkins University')
+    print('Details on data usages: https://github.com/CSSEGISandData/COVID-19\n')
     
 
 #Options to download cases from day one. 
@@ -177,7 +188,7 @@ def download_results(country, filenames):
 
  
 @main.command('usa', help='Track U.S states COVID-19 cases')
-@click.option('--states', '-s', default='all', help='Select state based on state code')
+@click.option('--states', '-s', default='all', help='Select state based on state codes')
 @click.option('--daily', '-d', is_flag=True, help='States COVID-19 data from dayone')
 @click.option('--save', '-sv', is_flag=True, help='Save results to csv')
 def get_usa_covid(states, daily, save):
@@ -234,11 +245,12 @@ def get_usa_covid(states, daily, save):
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
         else:
             if save:
-                sys.exit('Only daily cases for each state and summary of all state cases can be saved')
+                sys.exit('Only daily cases for each state and summary of all state cases can be saved.')
             else:
                 state_names = search.get_state_names(states)
-                top_results = results.filter(['positive', 'negative'])
-                top_results = search.change_number_formats(top_results)
+                top_results = results.filter(['positive', 'negative', 'recovered','death'])
+                # outcome_results = results.filter(['recovered','death'])
+                # outcome_results = search.change_number_formats(outcome_results)
                 hospitalized_results = results.filter(['hospitalizedCurrently', 'hospitalizedCumulative'])
                 icu_results = results.filter(['inIcuCurrently' , 'inIcuCumulative', 'onVentilatorCurrently' ])
                 trend_results = results.filter(['positiveIncrease', 'negativeIncrease','deathIncrease', 'hospitalizedIncrease'])
@@ -246,6 +258,7 @@ def get_usa_covid(states, daily, save):
                 #Has to try separately. Otherwise function does not work. Fill nan with zero will resolve the issue.
                 #But, will affect data interpretation. Decided to just try for each table.
                 try:
+                    top_results = search.change_number_formats(top_results)
                     hospitalized_results = search.change_number_formats(hospitalized_results)
                 except:
                     pass
@@ -262,6 +275,7 @@ def get_usa_covid(states, daily, save):
                 # data_date = data_date.to_string(index=False)
                 print(f'\n{state_names} cases:\n')
                 print(tabulate(top_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
+                # print(tabulate(outcome_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(hospitalized_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(icu_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
                 print(tabulate(trend_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
@@ -282,7 +296,7 @@ def get_isoid(country):
 
     clicov id
 
-    To display select country:
+    To display a selected country:
 
     For single word country:
 

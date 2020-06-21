@@ -14,13 +14,17 @@
     </br>
 </p>
 <hr/>
-Clicov is multi-platform command line app to track COVID-19 cases. The data are available for global and per country COVID-19 cases. The U.S cases are also available in per state basis and include positive and negative testing results.
+Clicov is a multi-platform command-line application to track COVID-19 cases. The data are available for global and per country cases. The U.S cases are also available in per state basis and include positive and negative testing results.
 
 ## Installation
+
+For MacOS and Linux, you could install clicov directly from pip. You may also consider to setup virtual environment using <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands'>conda</a> or <a href='https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/'>pip</a> virtual environments. To install clicov, use this command in your Terminal shell:
 
 ```
 pip install clicov
 ```
+
+For Windows, you could install clicov on <a href= https://docs.microsoft.com/en-us/windows/wsl/install-win10>Windows Subsystem for Linux</a>. The installation process is similar as above. Alternatively, you could also install it natively on Windows. One way to install it is using Anaconda/Miniconda. If you don't have either application yet, the instructions to install them are available <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html'>here</a>. Download Anaconda/Miniconda for python version 3.7 or above. After installation, open Anaconda command prompt. Then, install clicov by following the installation procedure for Linux and MacOS above.
 
 ## Usages
 ### Global Cases
@@ -31,39 +35,49 @@ To view summary of global cases:
 clicov summary -w
 ```
 
-To view summary of user selected country cases, use the command -c and add the country two-letter <a href='https://www.iban.com/country-codes'>iso2 code</a>. You can also use the country name, but iso2 codes will yield more consistent results, particularly for multi-word country names.
+To view summary of a selected country's cases, use the command -c and add the country two-letter <a href='https://www.iban.com/country-codes'>ISO2 code</a>. You can also use the country name, but ISO2 codes are less prone to errors, particularly for multi-word country names.
 
 ```
 clicov summary -c [country-iso2-code]
+```
 
-#To view country iso2 codes:
+You can check ISO2 codes using this command:
+
+```
 clicov id
+```
 
-#For example, US cases:
+For example, to view total U.S. cases:
+
+```
 clicov summary -c us
+```
 
-#You can chain it with global cases:
+You can also chain the command with global cases:
+
+```
 clicov summary -w -c us
 ```
 
-To download a summary of all countries' current cases:
+All countries' current cases can be saved into a spreadsheet:
 
 ```
 clicov summary -sv
 ```
 
-Per country cases from day one is also available for download:
+Cases from day one for a country is also available for download:
 
 ```
 clicov download -c [country-iso2-code]
 ```
-All files will be saved in a comma-separated values (.csv) format.
+
+All files will be saved in your current working directory as a comma-separated values (.csv) format.
 
 ### U.S Cases
 
-This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the U.S. cases in a country basis use the 'clicov summary' command instead.
+This option is available to dig dive into the U.S states' cases. You can view a summary of all states' cases in the U.S or in per state basis. The data are available for current cases and historical data for each state. For the total U.S. cases, use 'clicov summary -c us' command instead.
 
-To view all states' current  cases:
+To view a list of all states' current  cases:
 
 ```
 clicov usa
@@ -73,8 +87,11 @@ To view current cases per state:
 
 ```
 clicov usa -s [state-code]
+```
 
-#For New York
+For example, to view New York cases:
+
+```
 clicov usa -s ny
 ```
 
@@ -84,7 +101,7 @@ To download all states' current cases:
 clicov usa -sv
 ```
 
-To download per state cases from day one:
+To download cases from day one for a selected state:
 
 ```
 clicov usa -s [state-code] -sv

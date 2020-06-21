@@ -1,3 +1,10 @@
+"""Clean users' inputs, send api requests, and clean the results.
+
+To ensure consistent results from api requests, user inputs need to be cleaned.
+Right now, the input is loose. 
+No regex check to force two letter inputs for country and state codes.
+"""
+
 import json
 
 import pandas as pd
@@ -38,11 +45,11 @@ def get_url_usa_cases(states, daily):
     Build full url to send request to the covid tracking api.
 
     Args:
-        states (string): states code
+        states (string): states code to build full url.
         daily (string): show current data or daily data from first cases
 
     Returns:
-        string: a full url
+        string: a full url to send api requests
     """
     link = 'https://covidtracking.com/api/v1/states/'
     if daily:
@@ -64,7 +71,7 @@ def change_number_formats(tables):
         tables (int/float): a pandas table.
 
     Returns:
-        a thousand  separated pandas table.
+        a thousand separated pandas table.
     """
     for column in tables.columns:
         tables[column] = tables[column].apply(lambda x: f'{x:,}')
@@ -74,7 +81,9 @@ def clean_usa_results(results):
     """Function to clean pandas results and add thousand separator.
 
     Args:
-        results : pass pandas table
+        results : pandas table
+    Returns:
+        Cleaner table with numeric data formats change to thousand separators.
     """
     string_results = results.filter(['date','state'])
     number_results = results.drop(['date','state'], axis=1)
@@ -92,11 +101,16 @@ def clean_usa_results(results):
 
 def get_state_names(state_code):
     """
-
+    match state codes with the state name.
 
     Args:
-        state_code ([type]): [description]
+        state_code (string): two letter state codes to convert to state name.
+    Returns:
+
     """
+    #Dicts were copied from: 
+    #http://code.activestate.com/recipes/577305-python-dictionary-of-us-states-and-territories/
+    #Change variable name for readability.
     usa_state_territories = {
         'AK': 'Alaska',
         'AL': 'Alabama',
