@@ -28,22 +28,22 @@ pip install clicov
 To view summary of global cases:
 
 ```
-clicov -w
+clicov summary -w
 ```
 
 To view summary of user selected country cases, use the command -c and add the country two-letter <a href='https://www.iban.com/country-codes'>iso2 code</a>. You can also use the country name, but iso2 codes will yield more consistent results, particularly for multi-word country names.
 
 ```
-clicov -c [country-iso2-code]
+clicov summary -c [country-iso2-code]
 
 #To view country iso2 codes:
 clicov id
 
 #For example, US cases:
-clicov -c us
+clicov summary -c us
 
 #You can chain it with global cases:
-clicov -w -c us
+clicov summary -w -c us
 ```
 
 To download a summary of all countries' current cases:
