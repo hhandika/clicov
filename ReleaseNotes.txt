@@ -1,3 +1,6 @@
+0.0.10
+- Fix readme instructions
+
 0.0.9
 - Add recovered and total death for the U.S states' cases.
 
