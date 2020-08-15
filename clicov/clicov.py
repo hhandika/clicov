@@ -239,7 +239,7 @@ def get_usa_covid(states, daily, save):
             if save:
                 results.to_csv('results.csv', index=False)
                 print(f'\nDetails results are save in {current_wd} as {filename}')
-            filtered_results = results.filter(['date','state', 'positive', 'negative', 'hospitalizedCurrently', 'deathIncrease', 'hospitalizedIncrease'])
+            filtered_results = results.filter(['date','state', 'positive', 'negative', 'positiveIncrease', 'deathIncrease', 'hospitalizedIncrease'])
             printed_results  = search.clean_usa_results(filtered_results)
             print("\nAll U.S. states' cases:\n")
             print(tabulate(printed_results, headers='keys',  tablefmt='pretty', showindex=False, numalign='center', stralign='center'))
