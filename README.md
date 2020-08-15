@@ -8,6 +8,7 @@
     <img src='https://img.shields.io/pypi/implementation/clicov'>
     <img src='https://img.shields.io/github/languages/code-size/hhandika/clicov'>
     <img src='https://img.shields.io/pypi/wheel/clicov'>
+    <a href="https://doi.org/10.5281/zenodo.3986818"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3986818.svg" alt="DOI"></a>
     </br>
     <br>
     <img alt='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png' src='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png'>
