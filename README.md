@@ -7,7 +7,7 @@
     <img src='https://img.shields.io/pypi/pyversions/clicov'>
     <img src='https://img.shields.io/github/languages/code-size/hhandika/clicov'>
     <img src='https://img.shields.io/pypi/wheel/clicov'>
-    <a href="https://doi.org/10.5281/zenodo.3986818"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3986818.svg" alt="DOI"></a>
+    [![DOI](https://zenodo.org/badge/272283731.svg)](https://zenodo.org/badge/latestdoi/272283731)
     </br>
     <br>
     <img alt='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png' src='https://github.com/hhandika/clicov/blob/master/static/screenshot-2.png'>
